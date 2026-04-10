@@ -22,7 +22,7 @@ const Navbar = () => {
               ${isActive ? 'text-blue-500 underline' : ''}
             `}
           >
-            Pastes
+            Notes
           </NavLink>
         </div>
       </div>

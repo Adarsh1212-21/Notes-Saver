@@ -24,7 +24,7 @@ export const pasteSlice = createSlice({
 
       localStorage.setItem("pastes",JSON.stringify(state.pastes));
 
-      toast.success("Paste Updated");
+      toast.success("Note Updated");
      }
     },
 
@@ -44,7 +44,7 @@ export const pasteSlice = createSlice({
         state.pastes.splice(index,1);
         localStorage.setItem("pastes",JSON.stringify(state.pastes));
 
-        toast.success("Paste Deleted");
+        toast.success("Note Deleted");
       }
       
     }

@@ -22,7 +22,7 @@ const Home = () => {
     }, [pasteId, allPastes])
 
     function createPaste() {
-        if (!title.trim() || !value.trim()) return; // prevent empty paste
+        if (!title.trim() || !value.trim()) return; 
 
         const paste = {
             title: title,
@@ -37,7 +37,7 @@ const Home = () => {
             dispatch(addTopaste(paste));
         }
 
-        // reset after creation/updation
+        
         setTitle('');
         setValue('');
         setSearchParams({});
@@ -57,7 +57,7 @@ const Home = () => {
                     onClick={createPaste}
                     className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-2xl hover:bg-blue-600 transition shadow-md"
                 >
-                    {pasteId ? "Update Paste" : "Create Paste"}
+                    {pasteId ? "Update Notes" : "Create Notes"}
                 </button>
             </div>
 

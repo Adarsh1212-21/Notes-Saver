@@ -17,7 +17,7 @@ const Paste = () => {
 
   function handleDelete(pasteId) {
     dispatch(removeToPaste(pasteId));
-    toast.success("Paste deleted!");
+    toast.success("Note deleted!");
   }
 
   function handleShare(paste) {
@@ -38,7 +38,7 @@ const Paste = () => {
       <input
         className='p-3 rounded-2xl w-full md:w-[500px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm'
         type="search"
-        placeholder='Search your pastes...'
+        placeholder='Search your notes...'
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
@@ -86,7 +86,7 @@ const Paste = () => {
             </div>
           </div>
         )) : (
-          <p className="text-gray-200 mt-6 text-center">No pastes found.</p>
+          <p className="text-gray-200 mt-6 text-center">No notes found.</p>
         )}
       </div>
     </div>
