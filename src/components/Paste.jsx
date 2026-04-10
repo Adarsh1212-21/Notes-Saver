@@ -9,27 +9,32 @@ const Paste = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
 
-  // Filter pastes
+
   const filterData = pastes.filter((paste) =>
     paste.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Delete paste
+
   function handleDelete(pasteId) {
     dispatch(removeToPaste(pasteId));
     toast.success("Paste deleted!");
   }
 
-  // Share paste
-  function handleShare(pasteId) {
-    const shareURL = `${window.location.origin}/pastes/${pasteId}`;
-    navigator.clipboard.writeText(shareURL);
-    toast.success("Paste link copied!");
-  }
+  function handleShare(paste) {
+  const textToCopy = `Title: ${paste.title}\n\n${paste.content}`;
+
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      toast.success("Note copied to clipboard!");
+    })
+    .catch(() => {
+      toast.error("Failed to copy!");
+    });
+}
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      {/* Search */}
+      
       <input
         className='p-3 rounded-2xl w-full md:w-[500px] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm'
         type="search"
@@ -38,17 +43,17 @@ const Paste = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      {/* Paste List */}
+      
       <div className='flex flex-col gap-6 mt-6'>
         {filterData.length > 0 ? filterData.map((paste) => (
           <div key={paste._id} className="bg-white rounded-2xl shadow-lg p-6 flex flex-col gap-3 transition hover:shadow-2xl">
             {/* Title */}
             <h2 className="text-xl font-semibold text-gray-800">{paste.title}</h2>
 
-            {/* Content */}
+            
             <p className="text-gray-700 whitespace-pre-wrap">{paste.content}</p>
 
-            {/* Buttons and timestamp */}
+            
             <div className="flex flex-wrap gap-2 items-center mt-3">
               <Link to={`/?pasteId=${paste._id}`} className="px-4 py-1 rounded-lg border border-gray-400 text-gray-800 hover:bg-gray-100 transition">
                 Edit
@@ -69,11 +74,14 @@ const Paste = () => {
                 Copy
               </button>
 
-              <button onClick={() => handleShare(paste._id)} className="px-4 py-1 rounded-lg border border-gray-400 text-gray-800 hover:bg-gray-100 transition">
-                Share
-              </button>
+             <button
+  onClick={() => handleShare(paste)}
+  className="px-4 py-1 rounded-lg border border-gray-400 text-gray-800 hover:bg-gray-100 transition"
+>
+  Share
+</button>
 
-              {/* Timestamp */}
+              
               <span className="ml-auto text-gray-500 text-sm">{new Date(paste.createdAt).toLocaleString()}</span>
             </div>
           </div>
